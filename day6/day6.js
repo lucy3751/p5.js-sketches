@@ -9,10 +9,10 @@ function setup(){
 
  
     createCanvas(canvasWidth,canvasHeight);
-    background(0);
+    background(255);
 
-    // stroke(0);
-    // rect(0,0,canvasWidth,canvasHeight);
+    stroke(0);
+    rect(0,0,canvasWidth,canvasHeight);
 
     angleMode(DEGREES);
     // rectMode(CENTER);
