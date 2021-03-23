@@ -309,7 +309,7 @@ function draw(){
 
 
 
-
+//clear the Canvas
 function clearCanvas(){
         fill(0);
         rect(0,0,canvasWidth,canvasHeight);
