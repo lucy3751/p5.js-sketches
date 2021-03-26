@@ -3,15 +3,12 @@
 //Armin Hofmann's Graphic Design Manual, pg. 70
 
 
-let day = 10;//day sketch
+let day = 12;//day sketch
 
 
 //COLORS
 let red = [211,64,58];
 let beige = [255,252,232];
-
-
-
 
 //CANVAS
 let canvasHeight = 1000;
@@ -39,7 +36,8 @@ let gapY = canvasHeight/2 - startY
 let circlesTopRow = [];
 let circlesMiddleRow = [];
 let circlesBottomRow = [];
-
+let circlesSecondLastRow = [];
+let circlesSecondTopRow = [];
 
 
 function setup(){
@@ -71,7 +69,7 @@ function keyPressed(){
 
     if(keyCode === 83){
 
-        saveCanvas("z-day"+day,"png")//(name, file extension)
+        saveCanvas("L-day"+day,"png")//(name, file extension)
 
     }
 
@@ -89,9 +87,9 @@ function draw(){
         // stroke(0);
         circleGrid();
     
-        //draw the letter Z
+        //draw the letter L
         fill(red);
-        drawZ();
+        drawL();
 }
 
 
@@ -100,6 +98,7 @@ function circleGrid(){
 
     noStroke();
     noFill();
+
     // stroke(0);
 
     //DRAW CIRCLES, STORE THEIR PROPERTIES INTO AN ARRAY
@@ -110,7 +109,7 @@ function circleGrid(){
         x = startX+i*gapX/2; 
         y = startY;
 
-        if(x === startX || x === startX + 3*gapX/2){ //make the first and second last circle bigger
+        if(x === startX + gapX/2 || x === startX + 3*gapX/2){ //make the second and fourth circle bigger
             ellipse(x, y, bigCircleDiameter, bigCircleDiameter);
             circlesTopRow.push({
                 "centerX":x,
@@ -132,8 +131,36 @@ function circleGrid(){
 
     }
 
+     //second row
+     for (var i=0; i<5; i++){
 
-    //second row
+        x = startX+i*gapX/2; 
+        y = startY+gapY/2;
+
+        if(x === startX + gapX/2){ //make the second circle bigger
+            ellipse(x, y, bigCircleDiameter, bigCircleDiameter);
+            circlesSecondTopRow.push({
+                "centerX":x,
+                "centerY":y,
+                "diameter":bigCircleDiameter,
+                "radius": bigCircleDiameter/2
+            });
+        }else{
+
+            ellipse(x, y, smallCircleDiameter, smallCircleDiameter);
+            circlesSecondTopRow.push({
+                "centerX":x,
+                "centerY":y,
+                "diameter":smallCircleDiameter,
+                "radius": smallCircleDiameter/2
+            });
+       
+         }
+
+    }
+
+
+    //middle row
     for (var i=0; i<5; i++){
 
         x = startX+i*gapX/2;
@@ -159,13 +186,42 @@ function circleGrid(){
 
     }
 
-    //third row
+    //second last row
+    for (var i=0; i<5; i++){
+
+        x = startX+i*gapX/2;
+        y = startY+3*gapY/2;
+
+        if(x === startX ){ //make the first circle bigger
+            ellipse(x, y, bigCircleDiameter, bigCircleDiameter);
+            circlesSecondLastRow.push({
+                "centerX":x,
+                "centerY":y,
+                "diameter":bigCircleDiameter,
+                "radius": bigCircleDiameter/2
+            });
+
+
+        }else {
+            ellipse(x, y, smallCircleDiameter, smallCircleDiameter);
+            circlesSecondLastRow.push({
+                "centerX":x,
+                "centerY":y,
+                "diameter":smallCircleDiameter,
+                "radius": smallCircleDiameter/2
+            });
+
+        }
+
+    }
+
+    //bottom row
     for (var i=0; i<5; i++){
 
         x = startX+i*gapX/2;
         y = startY+2*gapY;
 
-        if(x === startX){ //make the first circle bigger
+        if(x === startX ){ //make the first circle bigger
             ellipse(x, y, bigCircleDiameter, bigCircleDiameter);
             circlesBottomRow.push({
                 "centerX":x,
@@ -192,55 +248,40 @@ function circleGrid(){
 
 
 
-function drawZ(){
+function drawL(){
 
 
     //DRAWING SHAPE USING VERTEX METHOD - https://p5js.org/reference/#/p5/vertex
     beginShape();
 
 
-         
-        //first row first circle, going clockwise
-        vertex(circlesTopRow[0].centerX, circlesTopRow[0].centerY- circlesTopRow[0].radius);   
-        vertex(circlesTopRow[3].centerX, circlesTopRow[3].centerY- circlesTopRow[3].radius);
-        vertex(circlesTopRow[3].centerX + cos(45)*circlesTopRow[3].radius, circlesTopRow[3].centerY + sin(45)*circlesTopRow[3].radius );
-
-
-        //diagonal line extending from first row second last cirlce to bottom row middle circle
+        
+        //second row 4th circle extending diagonal to bottom row 3rd circle, going clockwise
+        vertex(circlesSecondTopRow[3].centerX, circlesSecondTopRow[3].centerY + circlesSecondTopRow[3].radius);
         vertex(circlesBottomRow[2].centerX - circlesBottomRow[2].radius, circlesBottomRow[2].centerY);
-        //bottom row middle circle   
+
+
+        //bottom row 3rd circle extending to second last row 4th circle
         vertex(circlesBottomRow[2].centerX + circlesBottomRow[2].radius, circlesBottomRow[2].centerY);
+        vertex(circlesSecondLastRow[3].centerX - circlesSecondTopRow[3].radius, circlesSecondLastRow[3].centerY);
+        //second last row last cricle
+        vertex(circlesSecondLastRow[4].centerX + circlesSecondLastRow[4].radius , circlesSecondLastRow[4].centerY - circlesSecondLastRow[4].radius);
 
-
-        //middle row second last circle
-        vertex(circlesMiddleRow[3].centerX , circlesMiddleRow[3].centerY - circlesMiddleRow[3].radius);
-        //midle row last circle
-        vertex(circlesMiddleRow[4].centerX + circlesMiddleRow[4].radius , circlesMiddleRow[4].centerY - circlesMiddleRow[4].radius);
-        
-        
-        //bottom row last circle
+        //second last row last cricle extending to bottom row last circle
         vertex(circlesBottomRow[4].centerX + circlesBottomRow[4].radius, circlesBottomRow[4].centerY);
+        //bottom row last circle extending to second circle
         vertex(circlesBottomRow[4].centerX - cos(45)*circlesBottomRow[4].radius, circlesBottomRow[4].centerY + sin(45)*circlesBottomRow[4].radius);
-        vertex(circlesBottomRow[0].centerX, circlesBottomRow[0].centerY + circlesBottomRow[0].radius);
-        vertex (circlesBottomRow[0].centerX - cos(45)*circlesBottomRow[0].radius, circlesBottomRow[0].centerY - sin(45)*circlesBottomRow[0].radius);
+        vertex(circlesBottomRow[1].centerX, circlesBottomRow[1].centerY + circlesBottomRow[1].radius);
+        //first row second circle extending to 4th circle
+        vertex(circlesTopRow[1].centerX - circlesTopRow[1].radius, circlesTopRow[1].centerY);
+        vertex(circlesTopRow[3].centerX, circlesTopRow[3].centerY - circlesTopRow[3].radius);
 
-        //middle row middle circle
-        vertex(circlesMiddleRow[2].centerX + cos(45)*circlesMiddleRow[2].radius, circlesMiddleRow[2].centerY + sin(45)*circlesMiddleRow[2].radius);
-        vertex(circlesMiddleRow[2].centerX, circlesMiddleRow[2].centerY - circlesMiddleRow[2].radius);
-
-        //middle row first circle
-        vertex(circlesMiddleRow[0].centerX + cos(45)*circlesMiddleRow[0].radius, circlesMiddleRow[0].centerY + sin(45)*circlesMiddleRow[0].radius);
-        vertex(circlesMiddleRow[0].centerX - cos(45)*circlesMiddleRow[0].radius, circlesMiddleRow[0].centerY - sin(45)*circlesMiddleRow[0].radius);
-
-        //top row first circle
-        vertex(circlesTopRow[0].centerX - circlesTopRow[0].radius, circlesTopRow[0].centerY);
-        vertex(circlesTopRow[0].centerX, circlesTopRow[0].centerY- circlesTopRow[0].radius);  //starting point 
+        //back to starting point
+        vertex(circlesSecondTopRow[3].centerX, circlesSecondTopRow[3].centerY + circlesSecondTopRow[3].radius);
 
 
 
-
-        
-        
+    
         
 
     endShape();

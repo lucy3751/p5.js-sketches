@@ -45,9 +45,9 @@ function setup(){
     createCanvas(canvasWidth,canvasHeight);
     background(backgroundColor);
 
-    stroke(0);
-    noFill();
-    rect(0,0,canvasWidth,canvasHeight);
+    // stroke(0);
+    // noFill();
+    // rect(0,0,canvasWidth,canvasHeight);
 
     angleMode(DEGREES);
 
@@ -105,6 +105,7 @@ function draw(){
         drawZ();
     
         //mask the curve part of the letter 
+        stroke(0);
         fill(backgroundColor);
         ellipse(circlesTopRow[1].centerX, circlesTopRow[1].centerY, circlesTopRow[1].diameter, circlesTopRow[1].diameter);
         ellipse(circlesMiddleRow[1].centerX, circlesMiddleRow[1].centerY, circlesMiddleRow[1].diameter, circlesMiddleRow[1].diameter);
@@ -237,35 +238,39 @@ function drawZ(){
 
 
         // //  //top row to middle row diagonal line
-        vertex(circlesMiddleRow[1].centerX - cos(45)*circlesMiddleRow[1].radius, circlesMiddleRow[1].centerY - sin(45)*circlesMiddleRow[1].radius );
+        vertex(circlesMiddleRow[1].centerX - cos(30)*circlesMiddleRow[1].radius, circlesMiddleRow[1].centerY - sin(40)*circlesMiddleRow[1].radius );
 
 
         //  //middle row - from center to right
-        vertex(circlesMiddleRow[1].centerX + cos(45)*circlesMiddleRow[1].radius, circlesMiddleRow[1].centerY + sin(45)*circlesMiddleRow[1].radius );
-        vertex(circlesMiddleRow[2].centerX, circlesMiddleRow[2].centerY - circlesMiddleRow[2].radius);
-        vertex(circlesMiddleRow[2].centerX + circlesMiddleRow[2].radius, circlesMiddleRow[2].centerY );
+        vertex(circlesMiddleRow[1].centerX + cos(65)*circlesMiddleRow[1].radius, circlesMiddleRow[1].centerY + sin(80)*circlesMiddleRow[1].radius );
+        vertex(circlesMiddleRow[2].centerX - cos(70)*circlesMiddleRow[2].radius, circlesMiddleRow[2].centerY - sin(70)*circlesMiddleRow[2].radius);
+        vertex(circlesMiddleRow[2].centerX + cos(30)*circlesMiddleRow[2].radius, circlesMiddleRow[2].centerY + sin(30)*circlesMiddleRow[2].radius );
 
 
 
         // //middle row to small circle between middle and bottom row
-        vertex(extraSmallCircle[0].centerX - extraSmallCircle[0].radius, extraSmallCircle[0].centerY );
+        vertex(extraSmallCircle[0].centerX - cos(10)*extraSmallCircle[0].radius, extraSmallCircle[0].centerY - sin(27)*extraSmallCircle[0].radius);
+        vertex(extraSmallCircle[0].centerX - cos(10)*extraSmallCircle[0].radius, extraSmallCircle[0].centerY + sin(27)*extraSmallCircle[0].radius);
         
-        vertex(circlesBottomRow[2].centerX + cos(45)*circlesBottomRow[2].radius, circlesBottomRow[2].centerY - sin(45)*circlesBottomRow[2].radius);
+        vertex(circlesBottomRow[2].centerX + cos(35)*circlesBottomRow[2].radius, circlesBottomRow[2].centerY - sin(35)*circlesBottomRow[2].radius);
 
 
         // //bottom row - from right to left
-        vertex(circlesBottomRow[2].centerX - cos(45)*circlesBottomRow[2].radius, circlesBottomRow[2].centerY + sin(45)*circlesBottomRow[2].radius );
-        vertex(circlesBottomRow[1].centerX, circlesBottomRow[1].centerY - circlesBottomRow[1].radius );
-        vertex(circlesBottomRow[0].centerX + cos(45)*circlesBottomRow[0].radius, circlesBottomRow[0].centerY + sin(45)*circlesBottomRow[0].radius );
-        vertex(circlesBottomRow[0].centerX - cos(45)*circlesBottomRow[0].radius, circlesBottomRow[0].centerY - sin(45)*circlesBottomRow[0].radius );
+        vertex(circlesBottomRow[2].centerX - cos(70)*circlesBottomRow[2].radius, circlesBottomRow[2].centerY + sin(70)*circlesBottomRow[2].radius );
+
+        vertex(circlesBottomRow[1].centerX + cos(67)*circlesBottomRow[1].radius, circlesBottomRow[1].centerY - sin(73)*circlesBottomRow[1].radius );
+        vertex(circlesBottomRow[1].centerX - cos(67)*circlesBottomRow[1].radius, circlesBottomRow[1].centerY - sin(73)*circlesBottomRow[1].radius );
+        
+        vertex(circlesBottomRow[0].centerX + cos(75)*circlesBottomRow[0].radius, circlesBottomRow[0].centerY + sin(75)*circlesBottomRow[0].radius );
+        vertex(circlesBottomRow[0].centerX - cos(30)*circlesBottomRow[0].radius, circlesBottomRow[0].centerY - sin(30)*circlesBottomRow[0].radius );
 
    
         // //  //bottom row to first row middle circle
-        vertex(circlesTopRow[1].centerX + cos(45)*circlesTopRow[1].radius, circlesTopRow[1].centerY + sin(45)*circlesTopRow[1].radius );
-        vertex(circlesTopRow[1].centerX - circlesTopRow[1].radius, circlesTopRow[1].centerY);
+        vertex(circlesTopRow[1].centerX + cos(30)*circlesTopRow[1].radius, circlesTopRow[1].centerY + sin(35)*circlesTopRow[1].radius );
+        vertex(circlesTopRow[1].centerX - cos(30)*circlesTopRow[1].radius, circlesTopRow[1].centerY - sin(35)*circlesTopRow[1].radius);
         
         // //first row middle circle to middle row first circle
-        vertex(circlesMiddleRow[0].centerX + cos(45)*circlesMiddleRow[0].radius, circlesMiddleRow[0].centerY + sin(45)*circlesMiddleRow[0].radius );
+        vertex(circlesMiddleRow[0].centerX + cos(44)*circlesMiddleRow[0].radius, circlesMiddleRow[0].centerY + sin(45)*circlesMiddleRow[0].radius );
         vertex(circlesMiddleRow[0].centerX - circlesMiddleRow[0].radius, circlesMiddleRow[0].centerY);
 
         // //middle row first circle to first row left circle

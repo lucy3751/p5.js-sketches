@@ -23,7 +23,7 @@ let endY = canvasHeight - startY;
 let bigCircleDiameter = 5;
 let smallCircleDiameter = 0;
 
-console.log(smallCircleDiameter);
+// console.log(smallCircleDiameter);
 
 //gap b/w the circles
 let gapX = canvasWidth/2 - startX;
@@ -47,9 +47,9 @@ function setup(){
     createCanvas(canvasWidth,canvasHeight);
     background(backgroundColor);
 
-    stroke(0);
-    noFill();
-    rect(0,0,canvasWidth,canvasHeight);
+    // stroke(0);
+    // noFill();
+    // rect(0,0,canvasWidth,canvasHeight);
 
     angleMode(DEGREES);
 
