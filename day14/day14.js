@@ -489,7 +489,8 @@ function setup(){
 
     ////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////
-    ////DRAW THE TANGENT LINE BETWEEN TWO CIRCLES - USING OBJECTS
+    ////DRAW THE TANGENT LINE BETWEEN TWO CIRCLES - USING OBJECTS - https://www.youtube.com/watch?v=wfB9Z8nOmqE&ab_channel=skoolplusplus
+                                                                //- https://gieseanw.wordpress.com/2012/09/12/finding-external-tangent-points-for-two-circles/
     //** only works if both circles have different diameters, and same center point y - coordinate **
 
     //no transformations version
